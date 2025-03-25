@@ -16,7 +16,7 @@ void send_char(int server_pid , char c)
 		else 
 			kill(server_pid , SIGUSR1);
 		i--;
-		usleep(500);
+		usleep(1000);
 	}
 }
 
@@ -33,7 +33,7 @@ void post(char **argv)
 	while(message[i])
 		send_char(server_pid , message[i++]);
 
-	send_char(server_pid , '\n');
+	write(1 , "$\n" , 2);
 }
 
 int main(int argc , char **argv)

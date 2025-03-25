@@ -6,7 +6,7 @@
 #include "libft/libft.h"
 
 
-void get(int signum , siginfo_t *info , void *context)
+void get(int signum )
 {
 	
 	static int	bit_count = 0;
@@ -34,11 +34,9 @@ int main()
 	
 	write(1 , prompt , 7 + ft_strlen(ft_itoa(getpid())));
 
-	struct sigaction psa;
-	psa.sa_sigaction = get;
 
-	sigaction(SIGUSR1 , &psa , NULL);
-	sigaction(SIGUSR2 , &psa , NULL);
+	signal(SIGUSR1 , get);
+	signal(SIGUSR2 , get);
 
 	while(1)	pause();
 	
